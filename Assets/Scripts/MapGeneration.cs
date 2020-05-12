@@ -13,6 +13,8 @@ public class MapGeneration : MonoBehaviour
     public MapSize mapSize = MapSize.Small;
     //Will add player
     [Space]
+    public GameObject player;
+    [Space]
     public GameObject unbreakableWall;
     public GameObject breakableWall;
     [Space]
@@ -29,6 +31,8 @@ public class MapGeneration : MonoBehaviour
     int obstacleCant;
     void Start()
     {
+        Instantiate(player, new Vector3(0, 0, -1), Quaternion.identity);
+
         switch (mapSize)
         {
             case MapSize.Small:
@@ -61,14 +65,13 @@ public class MapGeneration : MonoBehaviour
             for (int j = 0; j < maxBlocksX; j++)
             {
                 Instantiate(unbreakableWall, new Vector3((i * spaceBetweenYBlocks) - ((maxBlocksY * spaceBetweenYBlocks) / 2) + spaceFix, 0, (j * spaceBetweenXBlocks) - ((maxBlocksX * spaceBetweenXBlocks) / 2) + spaceFix), Quaternion.identity);
-
-                if(i % spaceBetweenYBlocks != 0 && j % spaceBetweenXBlocks != 0)
+                /*if(i % spaceBetweenYBlocks != 0 && j % spaceBetweenXBlocks != 0)
                 {
                     for (int k = 0; k < obstacleCant; k++)
                     {
                         Instantiate(breakableWall, new Vector3(i, 0, j), Quaternion.identity);
                     }                   
-                }
+                }*/
             }
         }
     }
