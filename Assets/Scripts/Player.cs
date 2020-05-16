@@ -16,10 +16,10 @@ public class Player : MonoBehaviour
     int rayDistance = 1;
     Color rayColor = Color.green;
 
-    Vector3 goForward = Vector3.forward;
-    Vector3 goBack = Vector3.back;
-    Vector3 goRight = Vector3.right;
-    Vector3 goLeft = Vector3.left;
+    Vector3 forward = Vector3.forward;
+    Vector3 back = Vector3.back;
+    Vector3 right = Vector3.right;
+    Vector3 left = Vector3.left;
 
     private void Start()
     {
@@ -28,41 +28,38 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        t += Time.deltaTime;
-
-
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if (CanMove(goForward))
+            if (CanMove(forward))
             {
-                myTransform.position = transform.position + goForward;
+                myTransform.position = transform.position + forward;
                 myTransform.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            if (CanMove(goBack))
+            if (CanMove(back))
             {
-                myTransform.position = transform.position + goBack;
+                myTransform.position = transform.position + back;
                 myTransform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (CanMove(goRight))
+            if (CanMove(right))
             {
-                myTransform.position = transform.position + goRight;
+                myTransform.position = transform.position + right;
                 myTransform.rotation = Quaternion.Euler(0, 90, 0);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (CanMove(goLeft))
+            if (CanMove(left))
             {
-                myTransform.position = transform.position + goLeft;
+                myTransform.position = transform.position + left;
                 myTransform.rotation = Quaternion.Euler(0, 270, 0);
             }
         }        
@@ -80,14 +77,14 @@ public class Player : MonoBehaviour
         {
             string layerHit = LayerMask.LayerToName(hit.transform.gameObject.layer);
 
-            if (layerHit == "Unbreakable" ||
-                layerHit == "Edge")
+            switch (layerHit)
             {
-                return false;
-            }
-            else
-            {
-                return true;
+                case "Unbreakable":
+                case "Edge":
+                    return false;
+
+                default:
+                    return true;
             }
         }
         else

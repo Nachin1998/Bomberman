@@ -21,6 +21,8 @@ public class MapGeneration : MonoBehaviour
     public GameObject mediumMap;
     public GameObject largeMap;
 
+    [HideInInspector] public GameObject actualMap;
+
     int spaceFix = 1;
     int maxBlocksX;
     int maxBlocksY;
@@ -38,32 +40,36 @@ public class MapGeneration : MonoBehaviour
                 maxBlocksX = 5;
                 maxBlocksY = 9;
                 obstacleCant = Random.Range(5, 10);
-                Instantiate(smallMap);
+                actualMap = smallMap;
                 break;
 
             case MapSize.Medium:
                 maxBlocksX = 9;
                 maxBlocksY = 13;
                 obstacleCant = Random.Range(10, 15);
-                Instantiate(mediumMap);
+                actualMap = mediumMap;
                 break;
 
             case MapSize.Large:
                 maxBlocksX = 13;
                 maxBlocksY = 17;
                 obstacleCant = Random.Range(12, 20);
-                Instantiate(largeMap);
+                actualMap = largeMap;
                 break;
 
             default:
                 break;
         }
 
+        Instantiate(actualMap);
+
         for (int i = 0; i < maxBlocksY; i++)
         {
             for (int j = 0; j < maxBlocksX; j++)
             {
                 Instantiate(unbreakableWall, new Vector3((i * spaceBetweenYBlocks) - ((maxBlocksY * spaceBetweenYBlocks) / 2) + spaceFix, 0, (j * spaceBetweenXBlocks) - ((maxBlocksX * spaceBetweenXBlocks) / 2) + spaceFix), Quaternion.identity);
+                unbreakableWall.transform.SetParent(actualMap.transform);
+
                 /*if(i % spaceBetweenYBlocks != 0 && j % spaceBetweenXBlocks != 0)
                 {
                     for (int k = 0; k < obstacleCant; k++)
@@ -73,11 +79,5 @@ public class MapGeneration : MonoBehaviour
                 }*/
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
