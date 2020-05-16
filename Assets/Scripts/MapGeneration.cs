@@ -11,7 +11,6 @@ public class MapGeneration : MonoBehaviour
     };
 
     public MapSize mapSize = MapSize.Small;
-    //Will add player
     [Space]
     public GameObject player;
     [Space]

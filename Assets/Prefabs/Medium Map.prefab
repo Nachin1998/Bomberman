@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 88554806163450347}
   - component: {fileID: 5162131451405694506}
   - component: {fileID: 4528562451442965065}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6146873226486405626}
   - component: {fileID: 5410681994889651173}
   - component: {fileID: 4832234729169537910}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 7368013631341068022}
   - component: {fileID: 4134110326548851773}
   - component: {fileID: 4514348401092811417}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 6390528614716357556}
   - component: {fileID: 8844143477260883002}
   - component: {fileID: 6535426358300675034}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

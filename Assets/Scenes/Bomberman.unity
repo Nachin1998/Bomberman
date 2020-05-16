@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f0b16d81543934da4d51e6adfd8c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 0
+  mapSize: 2
   player: {fileID: 976523192742444594, guid: 1740a090552cb924d90f00a86698dae2, type: 3}
   unbreakableWall: {fileID: 4763199905048475648, guid: 41f20cbc27179ac46b80aa1c8b1a916b,
     type: 3}

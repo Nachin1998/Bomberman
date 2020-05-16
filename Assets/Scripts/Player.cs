@@ -10,60 +10,85 @@ public class Player : MonoBehaviour
     private Transform myTransform;
 
     public GameObject bomb;
-    int speed = 1;
+    public LayerMask layerMask;
 
     float t = 1;
-    Vector3 startPosition;
-    Vector3 target;
-    float timeToReachTarget;
+    int rayDistance = 1;
+    Color rayColor = Color.green;
+
+    Vector3 goForward = Vector3.forward;
+    Vector3 goBack = Vector3.back;
+    Vector3 goRight = Vector3.right;
+    Vector3 goLeft = Vector3.left;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        startPosition = transform.position;
-        target = startPosition;
         myTransform = transform;
     }
     void Update()
     {
         t += Time.deltaTime;
 
+
         if (Input.GetKeyDown(KeyCode.W))
         {
-            //target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-            //transform.position = Vector3.Lerp(transform.position, target, t);
-            target = transform.position + Vector3.forward;
-            if (CanMove(target))
+            if (CanMove(goForward))
             {
-                myTransform.position = target * speed;
+                myTransform.position = transform.position + goForward;
                 myTransform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (CanMove(goBack))
+            {
+                myTransform.position = transform.position + goBack;
+                myTransform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (CanMove(goRight))
+            {
+                myTransform.position = transform.position + goRight;
+                myTransform.rotation = Quaternion.Euler(0, 90, 0);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            myTransform.position = transform.position + Vector3.left * speed;
-            myTransform.rotation = Quaternion.Euler(0, 270, 0);
-        }
+            if (CanMove(goLeft))
+            {
+                myTransform.position = transform.position + goLeft;
+                myTransform.rotation = Quaternion.Euler(0, 270, 0);
+            }
+        }        
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            myTransform.position = transform.position + Vector3.back * speed;
-            myTransform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            myTransform.position = transform.position + Vector3.right * speed;
-            myTransform.rotation = Quaternion.Euler(0, 90, 0);
-        }
+        Debug.DrawRay(transform.position, Vector3.forward, rayColor);
+        Debug.DrawRay(transform.position, Vector3.right, rayColor);
+        Debug.DrawRay(transform.position, Vector3.left, rayColor);
+        Debug.DrawRay(transform.position, Vector3.back, rayColor);
     }
 
-    public bool CanMove(Vector3 nextPosition)
+    public bool CanMove(Vector3 direction)
     {
-        if(mapGeneration.unbreakableWall.transform.position == nextPosition)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction, out hit, rayDistance, layerMask))
         {
-            return false;
+            string layerHit = LayerMask.LayerToName(hit.transform.gameObject.layer);
+
+            if (layerHit == "Unbreakable" ||
+                layerHit == "Edge")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         else
         {
