@@ -5,11 +5,11 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public Bomb bomb;
     private MapGeneration mapGeneration;
     private Rigidbody rb;
     private Transform myTransform;
 
-    public GameObject bomb;
     public LayerMask layerMask;
 
     float t = 1;
@@ -62,7 +62,14 @@ public class Player : MonoBehaviour
                 myTransform.position = transform.position + left;
                 myTransform.rotation = Quaternion.Euler(0, 270, 0);
             }
-        }        
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 bombPos = transform.position;
+            Instantiate(bomb, bombPos, Quaternion.identity);
+            bomb.ActivateBomb();
+        }
 
         Debug.DrawRay(transform.position, Vector3.forward, rayColor);
         Debug.DrawRay(transform.position, Vector3.right, rayColor);

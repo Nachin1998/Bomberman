@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb4670a31d18d444a7295f56bd7fc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb: {fileID: 4606754551231287783, guid: 189a4c67c2f930548a4801528140583f, type: 3}
+  bomb: {fileID: -1823970552800510545, guid: 189a4c67c2f930548a4801528140583f, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 768

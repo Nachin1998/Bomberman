@@ -68,7 +68,6 @@ public class MapGeneration : MonoBehaviour
             for (int j = 0; j < maxBlocksX; j++)
             {
                 Instantiate(unbreakableWall, new Vector3((i * spaceBetweenYBlocks) - ((maxBlocksY * spaceBetweenYBlocks) / 2) + spaceFix, 0, (j * spaceBetweenXBlocks) - ((maxBlocksX * spaceBetweenXBlocks) / 2) + spaceFix), Quaternion.identity);
-                unbreakableWall.transform.SetParent(actualMap.transform);
 
                 /*if(i % spaceBetweenYBlocks != 0 && j % spaceBetweenXBlocks != 0)
                 {
