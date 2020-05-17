@@ -32,8 +32,6 @@ public class MapGeneration : MonoBehaviour
     int obstacleCant;
     void Start()
     {
-        Instantiate(player, new Vector3(0, 0, -1), Quaternion.identity);
-
         switch (mapSize)
         {
             case MapSize.Small:

@@ -329,7 +329,7 @@ MonoBehaviour:
     type: 3}
   breakableWall: {fileID: 7280298226603381084, guid: 3d0c011e4ddc8194ba3125854b064fba,
     type: 3}
-  smallMap: {fileID: 5767693864442975004, guid: 32c92428568d84b4cab04990964a90da,
+  smallMap: {fileID: 8599817204582131846, guid: 307f70e7959e8924a9232febe9d9f4bd,
     type: 3}
   mediumMap: {fileID: 7351842441246337849, guid: 144ba40ebdc34dc46984c78dc4d9dff2,
     type: 3}

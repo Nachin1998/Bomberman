@@ -7,7 +7,6 @@ public class Bomb : MonoBehaviour
     //public GameObject explosion;
     public Material[] materials;
     public LayerMask layerMask;
-
     Renderer rend;
     float timer = 0;
 
@@ -61,12 +60,13 @@ public class Bomb : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, rayDistance, layerMask))
         {
+            Debug.DrawRay(transform.position, direction * hit.distance, rayColor);
+
             string layerHit = LayerMask.LayerToName(hit.transform.gameObject.layer);
 
             switch (layerHit)
             {
-                case "Unbreakable":
-                    Debug.DrawRay(transform.position, direction * hit.distance, rayColor);
+                case "Unbreakable":                    
                     break;
 
                 case "Breakable":
