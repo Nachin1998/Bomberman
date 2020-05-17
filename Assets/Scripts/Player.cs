@@ -1,77 +1,104 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     public Bomb bomb;
     private MapGeneration mapGeneration;
-    private Rigidbody rb;
-    private Transform myTransform;
+    public float playerSpeed;
 
     public LayerMask layerMask;
 
     int rayDistance = 1;
     Color rayColor = Color.green;
 
+    Vector3 target;
     Vector3 forward = Vector3.forward;
     Vector3 back = Vector3.back;
     Vector3 right = Vector3.right;
     Vector3 left = Vector3.left;
+    
+    bool isMoving;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        myTransform = transform;
+        target = transform.position;        
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        transform.position = Vector3.Lerp(transform.position, target, playerSpeed * Time.deltaTime);
+
+        if (transform.position == target)
         {
-            if (CanMove(forward))
+            isMoving = false;
+        }
+
+        Debug.DrawRay(transform.position, forward, rayColor);
+        Debug.DrawRay(transform.position, right, rayColor);
+        Debug.DrawRay(transform.position, left, rayColor);
+        Debug.DrawRay(transform.position, back, rayColor);
+    }
+
+    private void LateUpdate()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (!isMoving)
             {
-                myTransform.position = transform.position + forward;
-                myTransform.rotation = Quaternion.Euler(0, 0, 0);
+                if (CanMove(forward))
+                {
+                    MoveToDirection(forward, 0);
+                }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
-            if (CanMove(back))
+            if (!isMoving)
             {
-                myTransform.position = transform.position + back;
-                myTransform.rotation = Quaternion.Euler(0, 180, 0);
+                if (CanMove(back))
+                {
+                    MoveToDirection(back, 180);
+                }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            if (CanMove(right))
+            if (!isMoving)
             {
-                myTransform.position = transform.position + right;
-                myTransform.rotation = Quaternion.Euler(0, 90, 0);
+                if (CanMove(right))
+                {
+                    MoveToDirection(right, 90);
+                }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
-            if (CanMove(left))
+            if (!isMoving)
             {
-                myTransform.position = transform.position + left;
-                myTransform.rotation = Quaternion.Euler(0, 270, 0);
+                if (CanMove(left))
+                {
+                    MoveToDirection(left, 270);
+                }
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bomb, transform.position, Quaternion.identity);
+            Instantiate(bomb, Vector3Int.RoundToInt(transform.position), Quaternion.identity);
+            bomb.bombCounter++;
+            Debug.Log(bomb.bombCounter);
         }
+    }
 
-        Debug.DrawRay(transform.position, Vector3.forward, rayColor);
-        Debug.DrawRay(transform.position, Vector3.right, rayColor);
-        Debug.DrawRay(transform.position, Vector3.left, rayColor);
-        Debug.DrawRay(transform.position, Vector3.back, rayColor);
+    void MoveToDirection(Vector3 direction, float rotation)
+    {
+        target = transform.position + direction;
+        transform.rotation = Quaternion.Euler(0, rotation, 0);
+        isMoving = true;
     }
 
     public bool CanMove(Vector3 direction)

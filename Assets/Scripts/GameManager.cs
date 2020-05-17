@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameOver = false;
-        Instantiate(player, new Vector3(0, 0, -1), Quaternion.identity);
+        //Instantiate(player, new Vector3(0, 0, -1), Quaternion.identity);
     }
 
     void Update()

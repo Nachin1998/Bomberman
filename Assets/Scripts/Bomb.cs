@@ -7,6 +7,9 @@ public class Bomb : MonoBehaviour
     //public GameObject explosion;
     public Material[] materials;
     public LayerMask layerMask;
+
+    [HideInInspector]public int bombCounter;
+
     Renderer rend;
     float timer = 0;
 
@@ -15,6 +18,7 @@ public class Bomb : MonoBehaviour
     void Start()
     {
         rend = gameObject.GetComponent<Renderer>();
+        bombCounter = 0;
     }
 
     void Update()
@@ -24,7 +28,6 @@ public class Bomb : MonoBehaviour
     public void ActivateBomb()
     {
         timer += Time.deltaTime;
-
         if (timer < 1)
         {
             rend.material = materials[0];
@@ -43,6 +46,7 @@ public class Bomb : MonoBehaviour
         }
         if(timer > 3.1)
         {
+            bombCounter--;
             Destroy(gameObject);
         }
     }
