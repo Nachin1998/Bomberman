@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
 
     public LayerMask layerMask;
 
-    float t = 1;
     int rayDistance = 1;
     Color rayColor = Color.green;
 
@@ -64,11 +63,9 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Vector3 bombPos = transform.position;
-            Instantiate(bomb, bombPos, Quaternion.identity);
-            bomb.ActivateBomb();
+            Instantiate(bomb, transform.position, Quaternion.identity);
         }
 
         Debug.DrawRay(transform.position, Vector3.forward, rayColor);
@@ -87,7 +84,9 @@ public class Player : MonoBehaviour
             switch (layerHit)
             {
                 case "Unbreakable":
+                case "Breakable":
                 case "Edge":
+                case "Bomb":
                     return false;
 
                 default:

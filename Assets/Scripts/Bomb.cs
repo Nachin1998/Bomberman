@@ -6,43 +6,77 @@ public class Bomb : MonoBehaviour
 {
     //public GameObject explosion;
     public Material[] materials;
+    public LayerMask layerMask;
+
     Renderer rend;
     float timer = 0;
 
+    Color rayColor = Color.green;
+    int rayDistance = 2;
     void Start()
     {
-        rend = GetComponent<Renderer>();
-        rend.sharedMaterial = materials[1];
+        rend = gameObject.GetComponent<Renderer>();
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        
+        ActivateBomb();
     }
     public void ActivateBomb()
     {
-        Debug.Log("Timer: " + timer);
-        if (timer > 3)
-        {
-            Destroy(gameObject);
-        }
+        timer += Time.deltaTime;
 
-        /*if(timer < 1)
+        if (timer < 1)
         {
-            rend.sharedMaterial = materials[1];
+            rend.material = materials[0];
         }
         if (timer > 1 && timer < 2)
         {
-            rend.sharedMaterial = materials[2];
+            rend.material = materials[1];
         }
-        if (timer > 2)
+        if (timer > 2 && timer < 3)
         {
-            rend.sharedMaterial = materials[3];
+            rend.material = materials[2];
         }
-        if (timer > 3)
+        if (timer > 3 && timer < 3.1)
+        {
+            Explode();
+        }
+        if(timer > 3.1)
         {
             Destroy(gameObject);
-        }*/
+        }
+    }
+
+    public void Explode()
+    {
+        CanDestroyInDirection(Vector3.forward);
+        CanDestroyInDirection(Vector3.back);
+        CanDestroyInDirection(Vector3.right);
+        CanDestroyInDirection(Vector3.left);
+    }
+
+    public void CanDestroyInDirection(Vector3 direction)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction, out hit, rayDistance, layerMask))
+        {
+            string layerHit = LayerMask.LayerToName(hit.transform.gameObject.layer);
+
+            switch (layerHit)
+            {
+                case "Unbreakable":
+                    Debug.DrawRay(transform.position, direction * hit.distance, rayColor);
+                    break;
+
+                case "Breakable":
+                    Destroy(hit.transform.gameObject);
+                    break;
+            }
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, direction * rayDistance, rayColor);
+        }
     }
 }

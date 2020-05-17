@@ -109,7 +109,7 @@ MonoBehaviour:
   bomb: {fileID: -1823970552800510545, guid: 189a4c67c2f930548a4801528140583f, type: 3}
   layerMask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 3840
 --- !u!54 &1210380827317192299
 Rigidbody:
   m_ObjectHideFlags: 0

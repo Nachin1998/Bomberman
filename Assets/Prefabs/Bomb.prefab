@@ -105,8 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b2ee687c083fa46837a42781ba4bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 0}
   materials:
   - {fileID: 2100000, guid: 0aed07752e6ddb44b8feaaef091f0971, type: 2}
   - {fileID: 2100000, guid: 823961eec68a52947afaba60d8c22489, type: 2}
   - {fileID: 2100000, guid: 12dbc9f121c01384a9e2a0aa630fec5e, type: 2}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2304
