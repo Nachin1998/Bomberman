@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        target = transform.position;        
+        target = transform.position;
     }
     void Update()
     {

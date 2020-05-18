@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     //public GameObject explosion;
+    public Bomb bomb;
+    GameManager gameManager;
     public Material[] materials;
     public LayerMask layerMask;
 
@@ -46,35 +48,34 @@ public class Bomb : MonoBehaviour
         }
         if(timer > 3.1)
         {
-            bombCounter--;
+            bombCounter = 0;
             Destroy(gameObject);
         }
     }
 
     public void Explode()
     {
-        CanDestroyInDirection(Vector3.forward);
-        CanDestroyInDirection(Vector3.back);
-        CanDestroyInDirection(Vector3.right);
-        CanDestroyInDirection(Vector3.left);
+        DestroyInDirection(Vector3.forward);
+        DestroyInDirection(Vector3.back);
+        DestroyInDirection(Vector3.right);
+        DestroyInDirection(Vector3.left);
     }
 
-    public void CanDestroyInDirection(Vector3 direction)
+    public void DestroyInDirection(Vector3 direction)
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, rayDistance, layerMask))
         {
             Debug.DrawRay(transform.position, direction * hit.distance, rayColor);
-
             string layerHit = LayerMask.LayerToName(hit.transform.gameObject.layer);
 
             switch (layerHit)
             {
-                case "Unbreakable":                    
-                    break;
-
                 case "Breakable":
                     Destroy(hit.transform.gameObject);
+                    break;
+
+                case "Player":
                     break;
             }
         }
@@ -82,5 +83,10 @@ public class Bomb : MonoBehaviour
         {
             Debug.DrawRay(transform.position, direction * rayDistance, rayColor);
         }
+    }
+
+    private void OnDestroy()
+    {
+        bombCounter = 0;
     }
 }
