@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver)
         {
-            SceneManager.LoadScene("Win");
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
