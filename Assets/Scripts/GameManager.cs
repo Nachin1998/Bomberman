@@ -6,11 +6,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject player;
-    public bool gameOver;
+    public static bool gameOver;
     void Start()
     {
         gameOver = false;
-        //Instantiate(player, new Vector3(0, 0, -1), Quaternion.identity);
     }
 
     void Update()

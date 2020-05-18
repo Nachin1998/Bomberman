@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f0b16d81543934da4d51e6adfd8c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 0
+  mapSize: 2
   player: {fileID: 976523192742444594, guid: 1740a090552cb924d90f00a86698dae2, type: 3}
   unbreakableWall: {fileID: 4763199905048475648, guid: 41f20cbc27179ac46b80aa1c8b1a916b,
     type: 3}
@@ -435,7 +435,7 @@ MonoBehaviour:
   smallMap: {fileID: 5767693864442975004, guid: 07b16519d8f041849ac4f6b2a5df59d2,
     type: 3}
   mediumMap: {fileID: 74347146755872273, guid: 240d24616159a614491cf0093db7b832, type: 3}
-  largeMap: {fileID: 3498568991299971552, guid: 0dcdf8c0eedbe0f44b979bef65c56eb4,
+  largeMap: {fileID: 4813408530905692120, guid: f610c9863eacad14e9e3e4aaa3b75567,
     type: 3}
   actualMap: {fileID: 0}
 --- !u!4 &1326187966
@@ -482,7 +482,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 976523192742444594, guid: 1740a090552cb924d90f00a86698dae2, type: 3}
-  gameOver: 0
 --- !u!4 &2098931243
 Transform:
   m_ObjectHideFlags: 0

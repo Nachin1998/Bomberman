@@ -10,7 +10,7 @@ public class Bomb : MonoBehaviour
     public Material[] materials;
     public LayerMask layerMask;
 
-    [HideInInspector]public int bombCounter;
+    public static int bombCounter;
 
     Renderer rend;
     float timer = 0;
@@ -76,6 +76,7 @@ public class Bomb : MonoBehaviour
                     break;
 
                 case "Player":
+                    GameManager.gameOver = true;
                     break;
             }
         }
@@ -83,10 +84,5 @@ public class Bomb : MonoBehaviour
         {
             Debug.DrawRay(transform.position, direction * rayDistance, rayColor);
         }
-    }
-
-    private void OnDestroy()
-    {
-        bombCounter = 0;
     }
 }

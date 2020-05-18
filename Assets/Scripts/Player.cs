@@ -38,6 +38,25 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position, right, rayColor);
         Debug.DrawRay(transform.position, left, rayColor);
         Debug.DrawRay(transform.position, back, rayColor);
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, forward, out hit, rayDistance, layerMask) ||
+            Physics.Raycast(transform.position, back, out hit, rayDistance, layerMask) ||
+            Physics.Raycast(transform.position, right, out hit, rayDistance, layerMask) ||
+            Physics.Raycast(transform.position, left, out hit, rayDistance, layerMask))
+        {
+            string layerHit = LayerMask.LayerToName(hit.transform.gameObject.layer);
+
+            switch (layerHit)
+            {
+                case "Exit":
+                    GameManager.gameOver = true;
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     private void LateUpdate()
@@ -86,12 +105,15 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Bomb.bombCounter < 1)
         {
-            Instantiate(bomb, Vector3Int.RoundToInt(transform.position), Quaternion.identity);
-            bomb.bombCounter++;
-            Debug.Log(bomb.bombCounter);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Instantiate(bomb, Vector3Int.RoundToInt(transform.position), Quaternion.identity);
+                Bomb.bombCounter += 1;
+            }
         }
+        
     }
 
     void MoveToDirection(Vector3 direction, float rotation)
