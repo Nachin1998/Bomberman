@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject player;
+    public Player player;
+    public MapGenerator mapGenerator;
+    public Enemy enemy;
     public static bool gameOver;
+
     void Start()
     {
         gameOver = false;
+        Instantiate(mapGenerator);
+        mapGenerator.InstantiateMap();
     }
 
     void Update()

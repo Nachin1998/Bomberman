@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Bomb bomb;
-    private MapGeneration mapGeneration;
+    private MapGenerator mapGenerator;
     public float playerSpeed;
 
     public LayerMask layerMask;

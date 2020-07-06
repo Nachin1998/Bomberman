@@ -16,7 +16,7 @@ public class CameraMovement : MonoBehaviour
                 break;
             case 1:
             default:
-                transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 10, player.transform.position.z - 10);
+                transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 7, player.transform.position.z - 5);
                 break;
         }
 
