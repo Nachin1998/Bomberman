@@ -57,7 +57,7 @@ MonoBehaviour:
   sparksLight: {fileID: 4718758928475635407}
   layerMask:
     serializedVersion: 2
-    m_Bits: 6400
+    m_Bits: 22784
 --- !u!65 &8220377001276655159
 BoxCollider:
   m_ObjectHideFlags: 0
