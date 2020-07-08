@@ -112,7 +112,7 @@ MonoBehaviour:
   rayDistance: 0.6
   layerMask:
     serializedVersion: 2
-    m_Bits: 23808
+    m_Bits: 19712
 --- !u!54 &-1130426439427512827
 Rigidbody:
   m_ObjectHideFlags: 0

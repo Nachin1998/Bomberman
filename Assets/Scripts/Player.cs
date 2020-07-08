@@ -16,13 +16,10 @@ public class Player : MonoBehaviour
     Color rayColor = Color.green;
 
     Vector3 target;
-    Vector3 forward = Vector3.forward;
-    Vector3 back = Vector3.back;
-    Vector3 right = Vector3.right;
-    Vector3 left = Vector3.left;
 
     bool isMoving;
     bool canPlaceBomb;
+    bool isAlive;
     private void Start()
     {
         target = transform.position;
@@ -32,6 +29,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!gameObject)
+        {
+            Debug.Log("DED");
+        }
         if (bombTimer)
         {
             timer += Time.deltaTime;
@@ -52,16 +53,18 @@ public class Player : MonoBehaviour
             isMoving = false;
         }
 
-        Debug.DrawRay(transform.position, forward, rayColor);
-        Debug.DrawRay(transform.position, right, rayColor);
-        Debug.DrawRay(transform.position, left, rayColor);
-        Debug.DrawRay(transform.position, back, rayColor);
+        DetectEntity(Vector3.forward);
+        DetectEntity(Vector3.back);
+        DetectEntity(Vector3.right);
+        DetectEntity(Vector3.left);
+    }
+
+    void DetectEntity(Vector3 direction)
+    {
+        Debug.DrawRay(transform.position, direction, rayColor);
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, forward, out hit, rayDistance, layerMask) ||
-            Physics.Raycast(transform.position, back, out hit, rayDistance, layerMask) ||
-            Physics.Raycast(transform.position, right, out hit, rayDistance, layerMask) ||
-            Physics.Raycast(transform.position, left, out hit, rayDistance, layerMask))
+        if (Physics.Raycast(transform.position, direction, out hit, rayDistance, layerMask))
         {
             string layerHit = LayerMask.LayerToName(hit.transform.gameObject.layer);
 
@@ -84,33 +87,33 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
-                if (CanMove(forward))
+                if (CanMove(Vector3.forward))
                 {
-                    MoveToDirection(forward, 0);
+                    MoveToDirection(Vector3.forward, 0);
                 }
             }
 
             if (Input.GetKey(KeyCode.S))
             {
-                if (CanMove(back))
+                if (CanMove(Vector3.back))
                 {
-                    MoveToDirection(back, 180);
+                    MoveToDirection(Vector3.back, 180);
                 }
             }
 
             if (Input.GetKey(KeyCode.D))
             {
-                if (CanMove(right))
+                if (CanMove(Vector3.right))
                 {
-                    MoveToDirection(right, 90);
+                    MoveToDirection(Vector3.right, 90);
                 }
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                if (CanMove(left))
+                if (CanMove(Vector3.left))
                 {
-                    MoveToDirection(left, 270);
+                    MoveToDirection(Vector3.left, 270);
                 }
             }
         }
@@ -119,8 +122,7 @@ public class Player : MonoBehaviour
         {
             if (timer == 0)
             {
-                Instantiate(bomb, transform.position, Quaternion.identity);
-                Debug.Log("Bruh");
+                Instantiate(bomb, transform.position, bomb.transform.rotation);
                 bombTimer = true;
             }
         }
@@ -156,5 +158,10 @@ public class Player : MonoBehaviour
         {
             return true;
         }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        Debug.Log("Bruh");
     }
 }
