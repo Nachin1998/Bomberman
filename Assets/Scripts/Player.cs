@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public LayerMask layerMask;
 
     int rayDistance = 1;
+    float timer = 0;
+    bool bombTimer;
     Color rayColor = Color.green;
 
     Vector3 target;
@@ -18,15 +20,31 @@ public class Player : MonoBehaviour
     Vector3 back = Vector3.back;
     Vector3 right = Vector3.right;
     Vector3 left = Vector3.left;
-    
-    bool isMoving;
 
+    bool isMoving;
+    bool canPlaceBomb;
     private void Start()
     {
         target = transform.position;
+        canPlaceBomb = true;
+        bombTimer = false;
     }
+
     void Update()
     {
+        if (bombTimer)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            timer = 0;
+        }
+        if (timer >= 3)
+        {
+            bombTimer = false;
+        }
+
         transform.position = Vector3.Lerp(transform.position, target, playerSpeed * Time.deltaTime);
 
         if (transform.position == target)
@@ -50,7 +68,8 @@ public class Player : MonoBehaviour
             switch (layerHit)
             {
                 case "Exit":
-                    GameManager.gameOver = true;
+                case "Enemy":
+                    //GameManager.gameOver = true;
                     break;
 
                 default:
@@ -61,42 +80,33 @@ public class Player : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (!isMoving)
         {
-            if (!isMoving)
+            if (Input.GetKey(KeyCode.W))
             {
                 if (CanMove(forward))
                 {
                     MoveToDirection(forward, 0);
                 }
             }
-        }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            if (!isMoving)
+            if (Input.GetKey(KeyCode.S))
             {
                 if (CanMove(back))
                 {
                     MoveToDirection(back, 180);
                 }
             }
-        }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (!isMoving)
+            if (Input.GetKey(KeyCode.D))
             {
                 if (CanMove(right))
                 {
                     MoveToDirection(right, 90);
                 }
             }
-        }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (!isMoving)
+            if (Input.GetKey(KeyCode.A))
             {
                 if (CanMove(left))
                 {
@@ -105,15 +115,15 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(Bomb.bombCounter < 1)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (timer == 0)
             {
-                Instantiate(bomb, Vector3Int.RoundToInt(transform.position), Quaternion.identity);
-                Bomb.bombCounter += 1;
+                Instantiate(bomb, transform.position, Quaternion.identity);
+                Debug.Log("Bruh");
+                bombTimer = true;
             }
         }
-        
     }
 
     void MoveToDirection(Vector3 direction, float rotation)

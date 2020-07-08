@@ -5,23 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
     public MapGenerator mapGenerator;
-    public Enemy enemy;
-    public static bool gameOver;
+    public EnemyManager enemyManager;
 
     void Start()
     {
-        gameOver = false;
-        Instantiate(mapGenerator);
         mapGenerator.InstantiateMap();
-    }
-
-    void Update()
-    {
-        if (gameOver)
-        {
-            SceneManager.LoadScene("GameOver");
-        }
+        enemyManager.InstantiateEnemies();
     }
 }

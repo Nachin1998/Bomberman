@@ -14,7 +14,7 @@ public class MapGenerator : MonoBehaviour
     public int mapWidth;
     public int mapDepth;
 
-    bool spawnDoor = false;
+    bool doorCreated = false;
 
     [HideInInspector] public List<GameObject> blockAmmount = new List<GameObject>();
 
@@ -41,10 +41,10 @@ public class MapGenerator : MonoBehaviour
                     blockState = 2;
                 }
 
-                if (blockState == 1 && !spawnDoor && Random.Range(0, 7) == 0)
+                if (blockState == 1 && !doorCreated && Random.Range(0, 7) == 0)
                 {
                     Instantiate(exitDoor, new Vector3(i, 0, j), Quaternion.identity, transform);
-                    spawnDoor = true;
+                    doorCreated = true;
                 }
 
                 switch (blockState)

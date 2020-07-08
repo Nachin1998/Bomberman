@@ -5,12 +5,10 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     //public GameObject explosion;
-    public Bomb bomb;
-    GameManager gameManager;
     public Material[] materials;
     public LayerMask layerMask;
 
-    public static int bombCounter;
+    public bool bombIsActive;
 
     Renderer rend;
     float timer = 0;
@@ -20,14 +18,10 @@ public class Bomb : MonoBehaviour
     void Start()
     {
         rend = gameObject.GetComponent<Renderer>();
-        bombCounter = 0;
+        bombIsActive = false;
     }
 
-    void Update()
-    {
-        ActivateBomb();
-    }
-    public void ActivateBomb()
+    private void Update()
     {
         timer += Time.deltaTime;
         if (timer < 1)
@@ -46,12 +40,15 @@ public class Bomb : MonoBehaviour
         {
             Explode();
         }
-        if(timer > 3.1)
+        if (timer > 3.1)
         {
-            bombCounter = 0;
             Destroy(gameObject);
         }
     }
+    /*public void ActivateBomb()
+    {
+        
+    }*/
 
     public void Explode()
     {
@@ -59,6 +56,7 @@ public class Bomb : MonoBehaviour
         DestroyInDirection(Vector3.back);
         DestroyInDirection(Vector3.right);
         DestroyInDirection(Vector3.left);
+        bombIsActive = false;
     }
 
     public void DestroyInDirection(Vector3 direction)
@@ -76,7 +74,7 @@ public class Bomb : MonoBehaviour
                     break;
 
                 case "Player":
-                    GameManager.gameOver = true;
+                    //GameManager.gameOver = true;
                     break;
             }
         }
