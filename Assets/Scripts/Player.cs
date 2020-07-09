@@ -18,13 +18,14 @@ public class Player : MonoBehaviour
     Vector3 target;
 
     bool isMoving;
-    bool canPlaceBomb;
-    bool isAlive;
+    public bool hitDoor;
+    public bool isDead = false;
     private void Start()
     {
         target = transform.position;
-        canPlaceBomb = true;
         bombTimer = false;
+        isDead = false;
+        hitDoor = false;
     }
 
     void Update()
@@ -57,6 +58,11 @@ public class Player : MonoBehaviour
         DetectEntity(Vector3.back);
         DetectEntity(Vector3.right);
         DetectEntity(Vector3.left);
+
+        if (!gameObject)
+        {
+            Debug.Log("Player script");
+        }
     }
 
     void DetectEntity(Vector3 direction)
@@ -162,6 +168,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Bruh");
+        hitDoor = true;
     }
 }

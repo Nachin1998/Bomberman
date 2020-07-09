@@ -8,19 +8,22 @@ public class CameraMovement : MonoBehaviour
     int input;
 
     void Update()
-    {    
-        switch (input)
-        { 
-            case 2:
-                transform.position = player.transform.position; //not complete
-                break;
-            case 1:
-            default:
-                transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 7, player.transform.position.z - 5);
-                break;
-        }
+    {
+        if (player)
+        {
+            switch (input)
+            {
+                case 2:
+                    transform.position = player.transform.position; //not complete
+                    break;
+                case 1:
+                default:
+                    transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 7, player.transform.position.z - 5);
+                    break;
+            }
 
-        transform.LookAt(player.transform);
+            transform.LookAt(player.transform);
+        }
     }
     void LateUpdate()
     {

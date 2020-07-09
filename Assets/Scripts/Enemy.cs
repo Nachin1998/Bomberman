@@ -119,7 +119,7 @@ public class Enemy : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            //Destroy(col.gameObject);
+            Destroy(col.gameObject);
         }
     }
 }
