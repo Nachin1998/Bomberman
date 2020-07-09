@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     Vector3 movement;
 
     Color rayColor;
-    
+    Ray ray;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,10 +30,12 @@ public class Enemy : MonoBehaviour
         enemyDirection = EnemyDirection.Forward;
 
         rayColor = Color.blue;
+        
     }
 
     void FixedUpdate()
     {
+        rb.constraints = RigidbodyConstraints.FreezePositionY;
         switch (enemyDirection)
         {
             case EnemyDirection.Forward:

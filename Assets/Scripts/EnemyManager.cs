@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -12,7 +11,7 @@ public class EnemyManager : MonoBehaviour
 
     [Space]
 
-    public int enemyTargetAmount;
+    public int enemyAmount;
 
     public void InstantiateEnemies()
     {
@@ -27,15 +26,15 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
-        if (freeSpaces.Count / 2 < enemyTargetAmount)
+        if (freeSpaces.Count / 2 < enemyAmount)
         {
-            enemyTargetAmount = freeSpaces.Count / 2;
+            enemyAmount = freeSpaces.Count / 2;
         }
 
-        for (int i = 0; i < enemyTargetAmount; i++)
+        for (int i = 0; i < enemyAmount; i++)
         {
             int aux = Random.Range(0, freeSpaces.Count - 1);
-            Instantiate(enemy, new Vector3((freeSpaces[aux] / mapGenerator.mapDepth), 0.1f, freeSpaces[aux] % mapGenerator.mapDepth), Quaternion.identity);
+            Instantiate(enemy, new Vector3((freeSpaces[aux] / mapGenerator.mapDepth), 0.1f, freeSpaces[aux] % mapGenerator.mapDepth) - new Vector3(0, 0.1f, 0), Quaternion.identity);
             freeSpaces.RemoveAt(aux);
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class Player : MonoBehaviour
     int rayDistance = 1;
     float timer = 0;
     bool bombTimer;
-    Color rayColor = Color.green;
+    
 
     Vector3 target;
 
@@ -67,6 +65,7 @@ public class Player : MonoBehaviour
 
     void DetectEntity(Vector3 direction)
     {
+        Color rayColor = Color.green;
         Debug.DrawRay(transform.position, direction, rayColor);
 
         RaycastHit hit;
@@ -128,7 +127,7 @@ public class Player : MonoBehaviour
         {
             if (timer == 0)
             {
-                Instantiate(bomb, transform.position, bomb.transform.rotation);
+                Instantiate(bomb, transform.position - new Vector3(0,0.3f, 0), bomb.transform.rotation);
                 bombTimer = true;
             }
         }

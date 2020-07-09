@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SideExplosions : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class SideExplosions : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer > 2)
+        if(timer > 1.5)
         {
             Destroy(gameObject);
         }
