@@ -1,9 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
     public GameObject explotion;
+    public List<GameObject> sideExplosions;
     public GameObject sideExplotion;
     ParticleSystem[] explosionAmmount;
 
@@ -29,7 +31,7 @@ public class Bomb : MonoBehaviour
     int maxExplosionV;
 
     float timer;
-    
+
     bool isCreated;
     public bool hitPlayer = false;
 
@@ -53,7 +55,7 @@ public class Bomb : MonoBehaviour
     private void FixedUpdate()
     {
         timer += Time.deltaTime;
-        if(timer < 1)
+        if (timer < 1)
         {
             mainModule.startColor = Color.yellow;
             sparksLight.color = Color.yellow;
@@ -70,7 +72,7 @@ public class Bomb : MonoBehaviour
         }
         else if (timer > 3)
         {
-            StartCoroutine(Explode());            
+            StartCoroutine(Explode());
         }
     }
 
@@ -117,10 +119,6 @@ public class Bomb : MonoBehaviour
 
             switch (layerHit)
             {
-                case "Breakable":
-                    Destroy(hit.transform.gameObject);
-                    break;
-
                 case "Unbreakable":
                     if ((direction * hit.distance).z == -0.5f)
                     {
@@ -139,7 +137,7 @@ public class Bomb : MonoBehaviour
                         maxExplosionV = 1;
                     }
 
-                    if ((direction * hit.distance).x == -0.5f)
+                    if ((direction * hit.distance).x == -0.5f)           //No funca
                     {
                         minExplosionH = 0;
                     }
@@ -157,10 +155,8 @@ public class Bomb : MonoBehaviour
                     }
                     break;
 
+                case "Breakable":
                 case "Player":
-                    hitPlayer = true;
-                    Destroy(hit.transform.gameObject);
-                    break;
                 case "Enemy":
                     Destroy(hit.transform.gameObject);
                     break;
@@ -170,5 +166,7 @@ public class Bomb : MonoBehaviour
         {
             Debug.DrawRay(transform.position, direction * rayDistance, rayColor);
         }
+
+
     }
 }
